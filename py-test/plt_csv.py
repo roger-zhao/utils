@@ -2,20 +2,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import csv
-import string as str
+import string
 
+plt.figure(1)
 csv_file = file('test.csv', 'rb')
 reader = csv.reader(csv_file)
-pwm = [[] for i in range(3)]
+max_ch = 9
+pwm = [[] for i in range(max_ch)]
 
-for line_str in reader:
-    pwm[(str.atoi(line_str[0]))].append(str.atof(line_str[1])+str.atof(line_str[2]))
+for line_string in reader:
+    if (string.atoi(line_string[0]) < max_ch):
+        pwm[(string.atoi(line_string[0]))].append(string.atof(line_string[1])+string.atof(line_string[2]))
 
-for ii in range(3):
-    print ii
-    print pwm[ii]
+plt.title("rcin log");
+plt.xlabel("rcin points");
+plt.ylabel("rcin values");
+for ii in range(max_ch - 1):
+    x = [i for i in range(len(pwm[ii]))]
+    # y = [(i+3) for i in range(len(pwm[ii]))]
+    plt.plot(x, pwm[ii], label="ch"+str(ii))
+    plt.legend()
+    # plt.plot(x, y)
 csv_file.close()
-plt.figure(1)
-# plt.show()
+print "plot done"
+plt.show()
 
 
