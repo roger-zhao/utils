@@ -17,6 +17,7 @@ for line_string in reader:
 plt.title("rcin log");
 plt.xlabel("rcin points");
 plt.ylabel("rcin values");
+plt.grid(True);
 for ii in range(max_ch - 1):
     x = [i for i in range(len(pwm[ii]))]
     # y = [(i+3) for i in range(len(pwm[ii]))]
