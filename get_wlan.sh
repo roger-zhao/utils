@@ -1,6 +1,12 @@
 # !/bin/bash
 date
-# first_wlan=$(ifconfig | awk '/eth/ && NR==1 {print $1}')
-first_wlan=$(iwconfig | awk '/wlan/ && NR==1 {print $1}')
-echo "first wlan:<"$first_wlan">"
+
+wl=$(iwconfig | awk '/wlan/ && NR==1 {print $1}')
+echo $wl 
+echo $wl | egrep "^wlan" >/dev/null 2>&1
+if [ $? -eq 0  ]; then
+       #echo yes
+       ifdown $wl
+       ./create_ap
+fi
 
